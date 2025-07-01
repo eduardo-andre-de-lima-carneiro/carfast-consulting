@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CarFast Consulting</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Chat Widget -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Lexend Deca', sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+    }
+
+    header, section, footer {
+      display: block;
+    }
+
+    .hero-section {
+      background: url('https://images.unsplash.com/photo-1615203062097-64312d1976b3?auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+      background-size: cover;
+      padding: 4rem 1rem 2rem;
+      position: relative;
+      text-align: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(6px);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    #n8n-chat-fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      background: white;
+      display: none;
+    }
+
+    footer {
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      background-color: #fff;
+    }
+
+    .n8n-chat-header {
+      background: #D32F2F !important;
+      color: white !important;
+      border-radius: 0 !important;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="container py-5 text-center">
+    <div class="mb-4">
+      <img src="https://img.icons8.com/ios-filled/100/fa314a/car--v1.png" alt="Ícone CarFast" width="64" height="64"/>
+    </div>
+    <h1 class="display-5 fw-bold text-danger">CarFast Consulting</h1>
+    <p class="lead text-secondary">Plataforma inteligente para recomendações automotivas personalizadas.</p>
+    <p class="text-muted small">Conectando pessoas, dados e inovação na jornada de compra de veículos.</p>
+  </header>
+
+  <!-- Hero section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h2 class="mb-4">Fale com nosso assistente inteligente</h2>
+      <p class="text-muted mb-4">Receba recomendações personalizadas com base em suas preferências e dados reais do mercado.</p>
+      <div class="text-center mb-4">
+        <button id="start-chat-btn" class="btn btn-danger btn-lg px-4 py-2">Iniciar Conversa</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diferenciais -->
+  <section class="container text-center py-5">
+    <h2 class="mb-4">Por que escolher a CarFast Consulting?</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5>🎯 Jornada Personalizada</h5>
+        <p>Utilizamos inteligência artificial para entregar recomendações sob medida, respeitando o perfil e as necessidades de cada consumidor.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>💬 Atendimento Inteligente</h5>
+        <p>Nosso chatbot oferece uma experiência conversacional fluida e acessível, guiando o usuário de forma intuitiva durante toda a decisão de compra.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>🌱 Compromisso ESG</h5>
+        <p>Desde o início, incorporamos práticas sustentáveis, éticas e inclusivas, promovendo escolhas conscientes e reduzindo impactos ambientais.</p>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-5">
+      <div class="col-md-4">
+        <h5>🧠 Base de Conhecimento</h5>
+        <p>Recomendações baseadas em dados reais, inteligência analítica e aprendizado contínuo com foco na transparência e responsabilidade.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>🤝 Modelo Escalável</h5>
+        <p>Plataforma com potencial de monetização via parcerias B2B, canais digitais e APIs integráveis para todo o ecossistema automotivo.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>🚀 Time Especializado</h5>
+        <p>Formado por profissionais com expertise em IA, UX, engenharia de software e negócios — liderado por Priscilla Silva e Eduardo Carneiro.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Desenvolvido por Priscilla Silva e Eduardo Carneiro • Conectando IA e pessoas desde 2025
+  </footer>
+
+  <div id="n8n-chat-fullscreen"></div>
+
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    document.getElementById("start-chat-btn").addEventListener("click", () => {
+      const chatContainer = document.getElementById("n8n-chat-fullscreen");
+      chatContainer.style.display = "block";
+
+      createChat({
+        webhookUrl: 'https://carfasting.app.n8n.cloud/webhook/5269ae78-eeda-4f97-942e-0fcf2be073a9/chat',
+        target: '#n8n-chat-fullscreen',
+        mode: 'fullscreen',
+        showWelcomeScreen: false,
+        defaultLanguage: 'pt-BR',
+        chatInputKey: 'chatInput',
+        chatSessionKey: 'sessionId',
+        metadata: { origem: 'landing-fullscreen' },
+        initialMessages: ['Olá! 👋 Como posso te ajudar a escolher seu carro hoje?'],
+        i18n: {
+          'pt-BR': {
+            title: 'Seu Consultor Automotivo Inteligente',
+            subtitle: '',
+            inputPlaceholder: 'Digite sua pergunta sobre carros aqui...',
+            getStarted: 'Iniciar Conversa',
+            welcomeMessage: 'Bem-vindo ao CarFast Consulting! 🚗'
+          }
+        },
+        theme: {
+          primaryColor: '#D32F2F',
+          secondaryColor: '#2A2A2A',
+          backgroundColor: '#FFFFFF',
+          inputBackground: '#F8F9FA',
+          textColor: '#333333',
+          borderRadius: '0px',
+          boxShadow: 'none'
+        }
+      });
+    });
+  </script>
+</body>
+</html>
